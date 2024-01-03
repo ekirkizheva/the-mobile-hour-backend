@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { User } from 'src/model/user.entityt';
 import { AdminService } from './admin.service';
 
@@ -12,9 +12,13 @@ export class AdminController {
       return this.adminService.getHello();
     }
 
-
     @Get('users')
     async getUsers(): Promise<User[]> {
         return await this.adminService.getUsers();
+    }
+
+    @Post('singin')
+    signIn(@Body() signInDto: Record<string, any>) {
+       return this.adminService.signIn(signInDto.username, signInDto.password);
     }
 }

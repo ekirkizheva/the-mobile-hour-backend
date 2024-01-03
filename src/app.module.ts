@@ -5,9 +5,16 @@ import { PublicModule } from './public/public.module';
 import { AdminModule } from './admin/admin.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './model/user.entityt';
+import { JwtModule } from '@nestjs/jwt';
+import { JWT_SECRET } from './admin/constants/jwt-secret';
 
 @Module({
   imports: [PublicModule, AdminModule,
+    JwtModule.register({
+      global: true,
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '600s' },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
