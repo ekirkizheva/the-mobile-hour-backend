@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { User } from 'src/model/user.entityt';
 import { AdminService } from './admin.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @Controller('admin')
 export class AdminController {
@@ -12,6 +13,7 @@ export class AdminController {
       return this.adminService.getHello();
     }
 
+    @UseGuards(AuthGuard)
     @Get('users')
     async getUsers(): Promise<User[]> {
         return await this.adminService.getUsers();
