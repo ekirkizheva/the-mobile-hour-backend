@@ -16,10 +16,6 @@ export class AdminService {
         private productRepository: Repository<Product>,
       ) {}
 
-    getHello(): string {
-        return 'Hello Admin API!';
-    }
-
     getUsers(): Promise<User[]> {
         return this.userRepository.find();
     }

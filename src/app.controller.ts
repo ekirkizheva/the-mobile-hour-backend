@@ -15,12 +15,6 @@ export class AppController {
     private readonly appService: AppService
   ) {}
 
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Post('seed')
   async postSeedData() {
     const hashedPassword = await bcrypt.hash('password', 10);

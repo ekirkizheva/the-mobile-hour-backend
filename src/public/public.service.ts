@@ -11,10 +11,6 @@ export class PublicService {
         private productRepository: Repository<Product>,
     ){}
 
-    getHello(): string {
-        return 'Hello Public API!';
-    }
-
     getProduct(id: number): Promise<Product[]> {
         return this.productRepository.find({
             relations: ['features'],

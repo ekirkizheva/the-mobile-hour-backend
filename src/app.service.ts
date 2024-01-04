@@ -14,10 +14,6 @@ export class AppService {
     private jwtService: JwtService) {
   }
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   async signIn(username: string, password: string) {
 
     if (!username || !password) {
