@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { AppService } from './app.service';
 import { User } from './model/user.entityt';
-import * as bcrypt from 'bcrypt';
 
 
 @Controller()

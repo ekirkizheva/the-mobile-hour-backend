@@ -1,10 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Product } from 'src/model/product.entity';
 import { User } from 'src/model/user.entityt';
 import { Repository } from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { Product } from 'src/model/product.entity';
-import { Feature } from 'src/model/feature.entity';
 
 @Injectable()
 export class AdminService {
