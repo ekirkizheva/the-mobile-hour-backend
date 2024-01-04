@@ -5,6 +5,12 @@ import { PublicService } from './public.service';
 export class PublicController {
     constructor(private readonly publicService: PublicService) {}
 
+
+    @Get('brands')
+    async getBrands() {
+      return (await this.publicService.getBrands()).map((item) => item.manufacturer);
+    }
+
     @Get('product')
     getProducts() {
       return this.publicService.getProducts();

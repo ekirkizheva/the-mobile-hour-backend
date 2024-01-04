@@ -11,6 +11,15 @@ export class PublicService {
         private productRepository: Repository<Product>,
     ){}
 
+
+    getBrands(): Promise<{manufacturer: string}[]> {
+        return this.productRepository
+            .createQueryBuilder()
+            .distinct()
+            .select(['manufacturer'])
+            .execute();
+    }
+
     getProduct(id: number): Promise<Product[]> {
         return this.productRepository.find({
             relations: ['features'],
