@@ -15,9 +15,17 @@ export class PublicService {
         return 'Hello Public API!';
     }
 
+    getProduct(id: number): Promise<Product[]> {
+        return this.productRepository.find({
+            relations: ['features'],
+            where: { id }
+        });
+    }
+
     getProducts(): Promise<Product[]> {
         return this.productRepository.find({
             relations: ['features'],
         });
     }
+    
 }
