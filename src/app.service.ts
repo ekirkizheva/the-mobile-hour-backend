@@ -32,7 +32,7 @@ export class AppService {
       throw new UnauthorizedException('Access denied');
     }
 
-    const payload = { sub: user.userid, username: user.username, firstname: user.firstName, lastname: user.lastName, user_role: user.user_role };
+    const payload = { sub: user.id, username: user.username, firstname: user.firstName, lastname: user.lastName, user_role: user.user_role };
     
     return {
       access_token: await this.jwtService.signAsync(payload),

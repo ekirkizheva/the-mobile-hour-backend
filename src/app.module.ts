@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './model/user.entityt';
 import { JwtModule } from '@nestjs/jwt';
 import { JWT_SECRET } from './admin/constants/jwt-secret';
+import { Product } from './model/product.entity';
+import { Feature } from './model/feature.entity';
 
 @Module({
   imports: [PublicModule, AdminModule,
@@ -22,7 +24,7 @@ import { JWT_SECRET } from './admin/constants/jwt-secret';
       username: 'root',
       password: 'Qwertyu123',
       database: 'the_mobile_hour',
-      entities: [User],
+      entities: [User, Product, Feature],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User])
