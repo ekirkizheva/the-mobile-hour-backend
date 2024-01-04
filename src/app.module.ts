@@ -15,7 +15,7 @@ import { Feature } from './model/feature.entity';
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,
-      signOptions: { expiresIn: '600s' },
+      signOptions: { expiresIn: '3600s' },
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
