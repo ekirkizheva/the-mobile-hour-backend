@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AppService } from './app.service';
@@ -11,7 +11,7 @@ export class AppController {
 
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
     private readonly appService: AppService
   ) {}
 
@@ -24,7 +24,7 @@ export class AppController {
   @Post('seed')
   async postSeedData() {
     const hashedPassword = await bcrypt.hash('password', 10);
-    await this.usersRepository.insert({
+    await this.userRepository.insert({
       username: 'admin',
       user_password: hashedPassword,
       firstName: 'Admin',
@@ -32,6 +32,11 @@ export class AppController {
       user_role: 'admin',
     });
     return 'Success';
+  }
+
+  @Post('singin')
+  signIn(@Body() signInDto: Record<string, any>) {
+     return this.appService.signIn(signInDto.username, signInDto.password);
   }
 
 }

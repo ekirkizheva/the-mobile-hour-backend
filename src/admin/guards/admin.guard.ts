@@ -9,7 +9,7 @@ import {
 import { JWT_SECRET } from '../constants/jwt-secret';
   
   @Injectable()
-  export class AuthGuard implements CanActivate {
+  export class AdminGuard implements CanActivate {
     constructor(private jwtService: JwtService) {}
   
     async canActivate(context: ExecutionContext): Promise<boolean> {
