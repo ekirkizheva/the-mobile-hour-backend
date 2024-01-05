@@ -15,6 +15,10 @@ export class AdminService {
         private productRepository: Repository<Product>,
       ) {}
 
+    getUser(id:number): Promise<User[]> {
+        return this.userRepository.findBy({id});
+    }
+
     getUsers(): Promise<User[]> {
         return this.userRepository.find();
     }

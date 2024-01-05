@@ -16,6 +16,12 @@ export class AdminController {
     }
 
     @UseGuards(AdminGuard)
+    @Get('user/:id')
+    async getUser(@Param('id') id: number): Promise<Partial<User>> {
+        return (await this.adminService.getUser(id)).map(({ user_password, ...user }) => user)[0];
+    }
+
+    @UseGuards(AdminGuard)
     @Post('user')
     async postUser(@Body() userDTO: User) {
         return await this.adminService.postUser(userDTO);
