@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from './product.entity';
 
 @Entity({ name: 'feature' })
 export class Feature {
@@ -37,4 +38,11 @@ export class Feature {
 
   @Column()
   front_camera: string;
+
+  @ManyToMany(() => Product, (product) => product.id, { 
+    cascade: true,  
+    onDelete: 'CASCADE',
+    onUpdate:'CASCADE'  })
+  @JoinTable()
+  features: Product[];
 }

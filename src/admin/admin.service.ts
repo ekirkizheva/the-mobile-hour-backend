@@ -49,4 +49,8 @@ export class AdminService {
     postProduct(product: Product) {
         return this.productRepository.save(product);
     }
+
+    async putProduct(id:number, product: Product) {
+        return this.productRepository.update({id}, product)
+    }
 }

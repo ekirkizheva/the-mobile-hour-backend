@@ -21,7 +21,10 @@ export class Product {
   @Column()
   stock_on_hand: number;
 
-  @ManyToMany(() => Feature, { cascade: true })
+  @ManyToMany(() => Feature, (feature) => feature.id, { 
+    cascade: true,  
+    onDelete: 'CASCADE',
+    onUpdate:'CASCADE' })
   @JoinTable()
   features: Feature[];
 }

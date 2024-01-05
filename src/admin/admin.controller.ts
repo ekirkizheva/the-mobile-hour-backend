@@ -44,4 +44,10 @@ export class AdminController {
     async postProduct(@Body() productDTO: Product) {
       return await this.adminService.postProduct(productDTO);
     }
+
+    @UseGuards(AdminGuard)
+    @Put('product/:id') 
+    async putProduct(@Body() productDTO: Product, User, @Param('id') id: number) {
+      return await this.adminService.putProduct(+id, productDTO);
+    }
 }
