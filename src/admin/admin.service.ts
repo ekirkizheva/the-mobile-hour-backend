@@ -24,6 +24,10 @@ export class AdminService {
         return await this.userRepository.insert({...user,user_password });
     }
 
+    async deleteUser(id: number) {
+        return await this.userRepository.delete({id});
+    }
+
     postProduct(product: Product) {
         return this.productRepository.save(product);
     }
