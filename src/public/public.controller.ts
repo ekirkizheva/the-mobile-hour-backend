@@ -17,7 +17,7 @@ export class PublicController {
     }
 
     @Get('product/:id')
-    getProduct(@Param('id') id: number) {
-      return this.publicService.getProduct(id);
+    async getProduct(@Param('id') id: number) {
+      return (await this.publicService.getProduct(id))[0];
     }
 }
