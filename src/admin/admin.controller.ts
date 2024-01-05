@@ -10,9 +10,15 @@ export class AdminController {
     constructor(private readonly adminService: AdminService) {}
 
     @UseGuards(AdminGuard)
-    @Get('users')
-    async getUsers(): Promise<User[]> {
-        return await this.adminService.getUsers();
+    @Get('user')
+    async getUsers(): Promise<Partial<User>[]> {
+        return (await this.adminService.getUsers()).map(({ user_password, ...user }) => user);
+    }
+
+    @UseGuards(AdminGuard)
+    @Post('user')
+    async postUser(@Body() userDTO: User) {
+        return await this.adminService.postUser(userDTO);
     }
 
     @UseGuards(AdminGuard)

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Product } from 'src/model/product.entity';
 import { User } from 'src/model/user.entityt';
 import { Repository } from 'typeorm';
@@ -16,6 +17,11 @@ export class AdminService {
 
     getUsers(): Promise<User[]> {
         return this.userRepository.find();
+    }
+
+    async postUser(user: User) {
+        const user_password = await bcrypt.hash(user.user_password, 10); 
+        return await this.userRepository.insert({...user,user_password });
     }
 
     postProduct(product: Product) {
