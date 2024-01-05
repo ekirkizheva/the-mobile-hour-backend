@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { Product } from 'src/model/product.entity';
 import { User } from 'src/model/user.entityt';
 import { AdminService } from './admin.service';
@@ -28,9 +28,15 @@ export class AdminController {
     }
 
     @UseGuards(AdminGuard)
+    @Put('user/:id')
+    async putUser(@Body() userDTO: User, @Param('id') id: number) {
+        return await this.adminService.putUser(+id, userDTO);
+    }
+
+    @UseGuards(AdminGuard)
     @Delete('user/:id')
     async deleteUser(@Param('id') id: number) {
-        return await this.adminService.deleteUser(id);
+        return await this.adminService.deleteUser(+id);
     }
 
     @UseGuards(AdminGuard)
