@@ -49,8 +49,14 @@ export class AdminService {
         }
     }
 
-    postProduct(product: Product) {
-        return this.productRepository.save(product);
+    async postProduct(product: Product) {
+        const prd = await this.productRepository.save(product);
+
+        await this.changelogRepository.save({
+            product: prd
+        });
+
+        return prd;
     }
 
     async putProduct(id:number, product: Product) {

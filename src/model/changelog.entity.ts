@@ -9,7 +9,7 @@ export class ChangeLog {
   @Column({type: 'datetime', default: () => "CURRENT_TIMESTAMP"})
   date_created: Date;
 
-  @Column()
+  @Column({type: 'datetime', default: () => "CURRENT_TIMESTAMP"})
   date_last_modified: Date;
 
   @ManyToOne(() => Product, { cascade: true })
