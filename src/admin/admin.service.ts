@@ -51,6 +51,19 @@ export class AdminService {
     }
 
     async putProduct(id:number, product: Product) {
-        return this.productRepository.update({id}, product)
+        // Product modification implemented in accordance with the workardound
+        // listed here: https://github.com/typeorm/typeorm/issues/1595
+        const original = await this.productRepository.findOne({
+            where: {id},
+            relations: ['features']
+        })
+    
+        
+        if(original) {
+            await this.productRepository.save(product) //This was the only way to garantee that a MANYTOMANY relationship was saved!
+        }   
+
+        const updated = await this.productRepository.findOne({where: {id}});
+        return updated
     }
 }
