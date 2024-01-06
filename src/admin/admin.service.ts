@@ -93,4 +93,10 @@ export class AdminService {
     deleteProduct(id: number) {
         return this.productRepository.delete({id});
     }
+
+    getChangeLog() {
+        return this.changelogRepository.find({
+            relations: ['product']
+        });
+    }
 }

@@ -56,4 +56,10 @@ export class AdminController {
     async deleteProduct(@Param('id') id: number) {
         return await this.adminService.deleteProduct(+id);
     }
+
+    @UseGuards(AdminGuard)
+    @Get('changelog')
+    async getChangeLog() {
+        return await this.adminService.getChangeLog();
+    }
 }
