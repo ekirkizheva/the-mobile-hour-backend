@@ -50,4 +50,10 @@ export class AdminController {
     async putProduct(@Body() productDTO: Product, @Param('id') id: number) {
       return await this.adminService.putProduct(+id, productDTO);
     }
+
+    @UseGuards(AdminGuard)
+    @Delete('product/:id')
+    async deleteProduct(@Param('id') id: number) {
+        return await this.adminService.deleteProduct(+id);
+    }
 }

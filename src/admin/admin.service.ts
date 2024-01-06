@@ -83,4 +83,8 @@ export class AdminService {
         const updated = await this.productRepository.findOne({where: {id}});
         return updated
     }
+
+    deleteProduct(id: number) {
+        return this.productRepository.delete({id});
+    }
 }
