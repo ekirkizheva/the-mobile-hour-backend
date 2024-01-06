@@ -5,6 +5,7 @@ import { AdminModule } from './admin/admin.module';
 import { JWT_SECRET } from './admin/constants/jwt-secret';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ChangeLog } from './model/changelog.entity';
 import { Feature } from './model/feature.entity';
 import { Product } from './model/product.entity';
 import { User } from './model/user.entityt';
@@ -24,7 +25,7 @@ import { PublicModule } from './public/public.module';
       username: 'root',
       password: 'Qwertyu123',
       database: 'the_mobile_hour',
-      entities: [User, Product, Feature],
+      entities: [User, Product, Feature, ChangeLog],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User])

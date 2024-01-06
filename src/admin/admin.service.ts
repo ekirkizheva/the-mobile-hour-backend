@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { ChangeLog } from 'src/model/changelog.entity';
 import { Product } from 'src/model/product.entity';
 import { User } from 'src/model/user.entityt';
 import { Repository } from 'typeorm';
@@ -13,6 +14,8 @@ export class AdminService {
         private userRepository: Repository<User>,
         @InjectRepository(Product)
         private productRepository: Repository<Product>,
+        @InjectRepository(ChangeLog)
+        private changelogRepository: Repository<ChangeLog>,
       ) {}
 
     getUser(id:number): Promise<User[]> {
@@ -58,9 +61,23 @@ export class AdminService {
             relations: ['features']
         })
     
-        
         if(original) {
             await this.productRepository.save(product) //This was the only way to garantee that a MANYTOMANY relationship was saved!
+
+            const changeLog = await this.changelogRepository.findOne({
+                where: { product },
+                relations: ['product']
+            })
+
+            if (changeLog) {
+                changeLog.date_last_modified = new Date();
+                await this.changelogRepository.save(changeLog);
+            } else {
+                await this.changelogRepository.save({
+                    date_last_modified: new Date(),
+                    product
+                })
+            }
         }   
 
         const updated = await this.productRepository.findOne({where: {id}});

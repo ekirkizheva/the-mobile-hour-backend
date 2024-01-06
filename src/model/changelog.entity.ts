@@ -6,7 +6,7 @@ export class ChangeLog {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({type: 'datetime', default: () => "CURRENT_TIMESTAMP"})
   date_created: Date;
 
   @Column()
