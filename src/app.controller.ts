@@ -17,7 +17,7 @@ export class AppController {
 
   @Post('seed')
   async postSeedData() {
-    const hashedPassword = await bcrypt.hash('password', 10);
+    const hashedPassword = await bcrypt.hash('admin', 10);
     await this.userRepository.insert({
       username: 'admin',
       user_password: hashedPassword,

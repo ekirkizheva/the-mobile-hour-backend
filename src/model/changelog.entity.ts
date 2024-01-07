@@ -12,7 +12,7 @@ export class ChangeLog {
   @Column({type: 'datetime', default: () => "CURRENT_TIMESTAMP"})
   date_last_modified: Date;
 
-  @ManyToOne(() => Product, { cascade: true })
+  @ManyToOne(() => Product, { cascade: true, onDelete: "CASCADE" })
   @JoinColumn({name: 'product_id'})
   product: Product;
 }
